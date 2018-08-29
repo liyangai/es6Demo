@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function getSomething(n) {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve(n)
+                }, 1000);
+            })
+        }
+        function step1(n) {
+            console.log(n);
+            return getSomething(n + 1)
+        }
+
+        function step2(n) {
+            console.log(n);
+            return getSomething(n + 2);
+        }
+        async function step3(n) {
+            console.log(n)
+         
+            var b = await (function () {
+               
+                return new Promise((resolve)=>{
+                    setTimeout(() => {
+                        resolve(n + 3) 
+                    }, 1000);
+                })
+            })()
+            return b;
+        }
+
+        // step1(0).then(step2).then(step3).then(a=>{console.log(a)})
+
+        // async function testAsync() {
+        //     return Promise.resolve("hello async");
+        // }
+        function setp0() {
+            return 0;
+        }
+
+        async function test() {
+            var a = await setp0();
+            var b = await step1(a);
+           
+            var c = await step2(b);
+            var d = await step3(c);
+            console.log('after d')
+            return d
+        }
+
+        test().then(d => {
+            console.log(d)
+        });
+        console.log('start or end')
+    </script>
+</body>
+
+</html>

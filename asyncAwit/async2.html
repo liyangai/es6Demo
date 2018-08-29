@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var list = [2,3,4,5,6];
+        const fun = (n)=>{
+            return new Promise((resolve)=>{
+                setTimeout(() => {
+                console.log(n)
+                resolve(n)
+                }, 1000);
+            })
+        }
+        const upload = (list,fun)=>{
+            return new Promise((resolve,reject)=>{
+                 (async function start(){
+                    for(let i=0;i<list.length;i++){
+                        await fun(list[i]);
+                    }
+                    console.log('aaabbb')
+                    resolve();
+                })()
+            })
+        }
+        upload(list,fun);
+    
+    </script>
+</body>
+</html>

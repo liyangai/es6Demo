@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const fun = (n) => {
+            return new Promise((resovle, reject) => {
+                setTimeout(() => {
+                    console.log(n)
+                    resovle(n);
+                }, 2000);
+            })
+        }
+
+
+        const queue = (list, fun) => {
+            return new Promise((resovle, reject) => {
+                try {
+                    (async function start() {
+                        for (let item of list) {
+                            await fun(item);
+                        }
+                        resovle()
+                    })()
+                } catch (e) {
+                    reject()
+                }
+            })
+        }
+
+        const list = [11, 22, 33, 44];
+
+        // queue(list,fun).then(()=>{console.log('队列执行完成')})
+
+        const a = [1, 1, '1', '1']
+        const b = new Set(a);
+        // console.log(Array.from(b))
+       
+    </script>
+</body>
+
+</html>
